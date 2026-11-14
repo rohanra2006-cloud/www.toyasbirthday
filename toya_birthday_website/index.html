@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday, Toya! 🎀</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fde4ec;--paper:#fff8fa;--ink:#6b2742;--pink:#f06a99;--soft:#f9b8cf;--shadow:rgba(107,39,66,.18);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#3a1a2a;--paper:#4d2538;--ink:#ffe3ee;--pink:#ff7fa9;--soft:#8a3d5d;--shadow:rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#3a1a2a;--paper:#4d2538;--ink:#ffe3ee;--pink:#ff7fa9;--soft:#8a3d5d;--shadow:rgba(0,0,0,.35)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg) repeating-linear-gradient(90deg,transparent 0 22px,rgba(240,106,153,.12) 22px 44px);color:var(--ink);font-family:"Caveat","Comic Sans MS",cursive;font-size:22px;text-align:center}
+main{max-width:460px;margin:0 auto;padding:22px 18px 40px}
+h1,h2{font-family:"Fraunces",Georgia,serif;font-style:italic;font-weight:600;margin:.2em 0 .4em;line-height:1.1}
+h1{font-size:2.3rem}h2{font-size:1.8rem}
+.card{background:var(--paper);border-radius:18px;padding:18px;box-shadow:0 8px 24px var(--shadow);border:3px dashed var(--soft)}
+button,.btn{font:inherit;font-weight:700;border:0;border-radius:999px;padding:10px 26px;background:var(--pink);color:#fff;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.18);margin:6px}
+button.alt{background:var(--soft);color:var(--ink)}
+button:active{transform:translateY(2px)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.photo{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;background:linear-gradient(135deg,var(--soft),var(--pink));display:flex;align-items:center;justify-content:center;font-size:64px;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+.polaroid{background:#fff;padding:8px 8px 22px;box-shadow:0 5px 14px var(--shadow);width:46%}
+.polaroid .photo{aspect-ratio:1/1;font-size:40px}
+.collage{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:14px 0}
+.polaroid:nth-child(odd){transform:rotate(-4deg)}.polaroid:nth-child(even){transform:rotate(3deg)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.grid button{margin:0;aspect-ratio:1;padding:0;font-size:1.5rem;background:var(--soft);color:var(--ink)}
+.grid button.done{background:var(--pink);color:#fff}
+.msg{min-height:3.2em;font-size:1.5rem;margin:8px 0}
+label{display:block;text-align:left;margin:10px 0 2px;font-weight:700}
+input,textarea{width:100%;font:inherit;font-size:20px;padding:8px 12px;border-radius:12px;border:2px solid var(--soft);background:var(--paper);color:var(--ink)}
+textarea{min-height:130px}
+.env{font-size:110px;cursor:pointer;background:none;box-shadow:none;padding:0;transition:transform .2s}
+.env:hover{transform:scale(1.08) rotate(-3deg)}
+.letter{text-align:left;white-space:pre-wrap;line-height:1.35;font-size:1.35rem}
+.bday{font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:2.6rem;color:var(--pink);transform:rotate(-3deg);margin:10px 0}
+.conf{position:fixed;top:-20px;font-size:24px;pointer-events:none;animation:fall linear forwards;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.conf{display:none}.env{transition:none}}
+.hidden{display:none}
+.slots{display:flex;gap:10px;margin:4px 0 8px}
+.slot{position:relative;width:78px;height:98px;margin:0;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--soft);font-size:16px;text-align:center}
+.slot img{width:100%;height:100%;object-fit:cover;display:block}
+.slot span{position:absolute;left:0;right:0;bottom:0;background:rgba(107,39,66,.75);color:#fff;padding:2px 0}
+.slot:focus-within{outline:3px solid var(--ink)}
+.sr{position:absolute;width:1px;height:1px;opacity:0}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script>
+var S={name:"Toya",from:"Me",letter:'Happy birthday!\\n\\nYou make every ordinary day feel like a celebration. Thank you for being you, for laughing with me, and for being my favourite person.\\n\\nI hope this year gives you everything you deserve and more.\\n\\nStay blessed,',photos:["images/photo1.jpg","images/photo2.jpg","images/photo3.jpg","images/photo4.jpg","images/photo5.png"],step:1,opened:{}};
+var P=S.photos;S.slots={open:[P[0]],grid:[P[1]],book:[P[2],P[3],P[4]],final:[P[2],P[3],P[4]]};
+var REASONS=["Your smile","Your laugh","Your kindness","The way you care","Your silly jokes","Your hugs","Your courage","Your voice","Your eyes","Your patience","How you inspire me","Just being you"];
+var app=document.getElementById("app");
+function esc(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML}
+function ph(k,i){var u=S.slots[k][i];return '<div class="photo">'+(u?'<img alt="" src="'+u+'">':"&#127872;")+'</div>'}
+var GROUPS=[["open","Opening photo",1],["grid","Number-grid photo",1],["book","Birthday scrapbook",3],["final","Final slide",3]];
+function slotsUI(){return GROUPS.map(function(g){var c="";for(var i=0;i<g[2];i++)c+='<label class="slot"><img alt="" src="'+(S.slots[g[0]][i]||"")+'"><span>Change</span><input class="sr" type="file" accept="image/*" data-k="'+g[0]+'" data-i="'+i+'"></label>';return '<label>'+g[1]+'</label><div class="slots">'+c+'</div>'}).join("")}
+function confetti(){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;var e=["🎉","🎀","💖","✨","🎈","🌸"];for(var i=0;i<28;i++){var s=document.createElement("span");s.className="conf";s.textContent=e[i%e.length];s.style.left=Math.random()*100+"vw";s.style.animationDuration=(2.5+Math.random()*2.5)+"s";s.style.animationDelay=Math.random()*.8+"s";document.body.appendChild(s);setTimeout(function(x){x.remove()},6500,s)}}
+function go(n){S.step=n;render();window.scrollTo(0,0)}
+function render(){var h="";
+if(S.step==1){h='<h1>Hey '+esc(S.name)+'…</h1><div class="card">'+ph('open',0)+'<h2 style="margin-top:14px">Do you want a surprise??</h2><button id="yes">YES!!</button><button class="alt" id="no">NO!!</button></div>'}
+else if(S.step==1.5){h='<div class="card"><div style="font-size:110px">🙀</div><h2>NOOOO!!! Try again</h2><button id="back">Go back</button></div>'}
+else if(S.step==2){var c=Object.keys(S.opened).length;h='<h2>Tap every number 💌</h2><div class="card">'+ph('grid',0)+'<div class="grid">'+REASONS.map(function(r,i){return '<button data-i="'+i+'" class="'+(S.opened[i]?"done":"")+'" aria-label="Reason '+(i+1)+'">'+(i+1)+'</button>'}).join("")+'</div><div class="msg" id="msg" aria-live="polite">'+(c+" of 12 opened")+'</div></div><button id="nx" class="'+(c<12?"hidden":"")+'">Next</button>'}
+else if(S.step==3){h='<div class="bday">Happy Birthday!</div><div class="collage">'+[0,1,2].map(function(i){return '<div class="polaroid">'+ph('book',i)+'</div>'}).join("")+'</div><h2>Dear '+esc(S.name)+', you have mail…</h2><button id="nx">Next</button>'}
+else if(S.step==4){h='<h2>A letter for you</h2><button class="env" id="open" aria-label="Open the letter">💌</button><p>Tap to open</p>'}
+else if(S.step==5){h='<div class="card"><div class="letter">'+esc(S.letter)+'\n\n'+esc(S.from)+' 💖</div></div><button id="nx">One more thing</button>'}
+else if(S.step==6){h='<div class="bday">Pretty is just the start</div><div class="collage">'+[0,1,2].map(function(i){return '<div class="polaroid">'+ph('final',i)+'</div>'}).join("")+'</div><h2>Some people are beautiful.<br>You make it look effortless, '+esc(S.name)+'. ✨</h2><button class="alt" id="again">Watch again</button>'}
+app.innerHTML=h;bind()}
+function $(id){return document.getElementById(id)}
+function on(id,fn){var e=$(id);if(e)e.onclick=fn}
+function bind(){
+on("go",function(){S.name=$("n").value.trim()||"Toya";S.from=$("f").value.trim()||"Me";S.letter=$("l").value;go(1)});
+document.querySelectorAll(".slot input").forEach(function(inp){inp.onchange=function(){var f=inp.files[0];if(!f)return;var u=URL.createObjectURL(f);S.slots[inp.dataset.k][+inp.dataset.i]=u;inp.parentNode.querySelector("img").src=u}});
+on("yes",function(){confetti();go(2)});on("no",function(){go(1.5)});on("back",function(){go(1)});
+document.querySelectorAll(".grid button").forEach(function(b){b.onclick=function(){var i=+b.dataset.i;S.opened[i]=1;b.className="done";var c=Object.keys(S.opened).length;$("msg").textContent=REASONS[i]+" 💖 ("+c+"/12)";if(c==12){$("nx").className="";confetti()}}});
+on("nx",function(){var n={2:3,3:4,5:6}[S.step];if(S.step==3)confetti();go(n)});
+on("open",function(){confetti();go(5)});
+on("again",function(){S.opened={};go(1)});}
+render();
+</script>
+</body>
+</html>
